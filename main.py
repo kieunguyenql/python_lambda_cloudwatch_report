@@ -1,5 +1,5 @@
 import boto3
-from datetime import datetime
+from datetime import date
 import json
 import os
 import smtplib
@@ -81,7 +81,10 @@ def send_images_to_email(sender_email, sender_password, recipient_email, directo
 
 def lambda_handler(event, context):
     
-
+    today= date.today()
+    today=str(today)
+    email_message= f"Hello, this is report on {today}"
+    
     get_metrics([
                  ["AWS/EC2", "CPUUtilization", "InstanceId", "i-05fb500020da1f407"],
                  ["AWS/EC2", "CPUUtilization", "InstanceId", "i-0c2e85b8d1cf4e34b"],
@@ -130,4 +133,4 @@ def lambda_handler(event, context):
 
     print('Send email report')
 
-    send_images_to_email('nguyen.van@ascendcorp.com', 'abc', 'kieunguyen.ql@gmail.com', '/tmp', 'hello')
+    send_images_to_email('nguyen.van@ascendcorp.com', 'dlfxcspapykcwxxy', 'kieunguyen.ql@gmail.com', '/tmp', email_message)
